@@ -1,13 +1,7 @@
-class Gishatich extends Base {
-    constructor(x, y) {
-        super(x, y);
-        this.energy = 5;
-        this.multiply = 14;
-        this.index = 3;
-    }
-    yntrelVandak(ch) {
-        this.stanalNorKordinatner();
-        super.yntrelVandak(ch);
+class Gishatich extends KendaniEak {
+    constructor(x, y, index) {
+        super(x, y, index);
+        this.tariq = 0;
     }
     stanalNorKordinatner() {
         this.directions = [
@@ -20,6 +14,10 @@ class Gishatich extends Base {
             [this.x, this.y + 1],
             [this.x + 1, this.y + 1]
         ];
+    }
+    yntrelVandak(ch) {
+        this.stanalNorKordinatner();
+        return super.yntrelVandak(ch);
     }
     sharjvel() {
         this.stanalNorKordinatner();
@@ -61,14 +59,15 @@ class Gishatich extends Base {
             this.sharjvel();
         }
     }
-    mahanal() {
-        if (this.energy < 0) {
-            matrix[this.y][this.x] = 0;
-            for (var c in gishatich) {
-                if (gishatich[c].x == this.x && gishatich[c].y == this.y) {
-                    gishatich.splice(c, 1);
+      mahanal() {
+            if (this.energy < 0) {
+                matrix[this.y][this.x] = 0;
+                for (var c in gishatich) {
+                    if (gishatich[c].x == this.x && gishatich[c].y == this.y) {
+                        gishatich.splice(c, 1);
+                    }
                 }
             }
-        }
-    }
+      }
 }
+        

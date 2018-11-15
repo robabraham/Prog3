@@ -1,13 +1,7 @@
-class Vorsord extends Base {
-    constructor(x, y) {
-        super(x, y);
-        this.energy = 4;
-        this.multiply = 11;
-        this.index = 4;
-    }
-    yntrelVandak(ch) {
-        this.stanalNorKordinatner();
-        super.yntrelVandak(ch);
+class Vorsord extends KendaniEak {
+    constructor(x, y, index) {
+        super(x, y, index);
+        this.tariq = 0;
     }
     stanalNorKordinatner() {
         this.directions = [
@@ -20,6 +14,10 @@ class Vorsord extends Base {
             [this.x, this.y + 1],
             [this.x + 1, this.y + 1]
         ];
+    }
+    yntrelVandak(ch) {
+        this.stanalNorKordinatner();
+        return super.yntrelVandak(ch);
     }
     sharjvel() {
         this.stanalNorKordinatner();
@@ -35,7 +33,7 @@ class Vorsord extends Base {
         }
     }
     bazmanal() {
-        if (this.energy == 8) {
+        if (this.energy == 10) {
             var norVandak = random(this.yntrelVandak(0));
             if (norVandak) {
                 var norvorsord = new Vorsord(norVandak[0], norVandak[1]);
@@ -61,13 +59,13 @@ class Vorsord extends Base {
         }
     }
     mahanal() {
-        if (this.energy < 0) {
-            matrix[this.y][this.x] = 0;
-            for (var c in vorsord) {
-                if (vorsord[c].x == this.x && vorsord[c].y == this.y) {
-                    vorsord.splice(c, 1);
+            if (this.energy < 0) {
+                matrix[this.y][this.x] = 0;
+                for (var c in vorsord) {
+                    if (vorsord[c].x == this.x && vorsord[c].y == this.y) {
+                        vorsord.splice(c, 1);
+                    }
                 }
             }
         }
-    }
 }

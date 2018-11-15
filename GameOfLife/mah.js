@@ -1,13 +1,7 @@
-class Mah extends Base {
-    constructor(x, y) {
-        super(x,y);
-        this.energy = 3;
-        this.multiply = 8;
-        this.index = 5;
-    }
-    yntrelVandak(ch) {
-        this.stanalNorKordinatner();
-        super.yntrelVandak(ch);
+class Mah extends KendaniEak {
+    constructor(x, y, index) {
+        super(x, y, index);
+        this.tariq = 0;
     }
     stanalNorKordinatner() {
         this.directions = [
@@ -21,7 +15,11 @@ class Mah extends Base {
             [this.x + 1, this.y + 1]
         ];
     }
-    sharjvel() {
+    yntrelVandak(ch) {
+        this.stanalNorKordinatner();
+        return super.yntrelVandak(ch);
+    }
+     sharjvel() {
         this.stanalNorKordinatner();
         var datarkVandakner = this.yntrelVandak(0);
         var datarkVandakner = this.yntrelVandak(1);
@@ -35,7 +33,7 @@ class Mah extends Base {
         }
     }
     bazmanal() {
-        if (this.energy == 10) {
+        if (this.energy == 15) {
             var norVandak = random(this.yntrelVandak(0));
             if (norVandak) {
                 var normah = new Mah(norVandak[0], norVandak[1]);

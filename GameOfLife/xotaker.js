@@ -1,13 +1,7 @@
-class Xotaker extends Base {
-    constructor(x, y) {
-        super(x, y);
-        this.energy = 7;
-        this.multiply = 17;
-        this.index = 2;
-    }
-    yntrelVandak(ch) {
-        this.stanalNorKordinatner();
-        super.yntrelVandak(ch);
+class Xotaker extends KendaniEak {
+    constructor(x, y, index) {
+        super(x, y, index);
+        this.tariq = 0;
     }
     stanalNorKordinatner() {
         this.directions = [
@@ -21,6 +15,11 @@ class Xotaker extends Base {
             [this.x + 1, this.y + 1]
         ];
     }
+    yntrelVandak(ch) {
+        this.stanalNorKordinatner();
+        return super.yntrelVandak(ch);
+    }
+
     sharjvel() {
         this.stanalNorKordinatner();
         var datarkVandakner = this.yntrelVandak(0);
@@ -49,7 +48,7 @@ class Xotaker extends Base {
         }
     }
     bazmanal() {
-        if (this.energy == 8) {
+        if (this.energy == 5) {
             this.energy++;
             var norVandak = random(this.yntrelVandak(0));
             if (norVandak) {
@@ -70,4 +69,6 @@ class Xotaker extends Base {
             }
         }
     }
+
 }
+

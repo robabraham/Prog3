@@ -1,10 +1,10 @@
 var weather;
 var days = 0;
 var matrix = [];
-var m = 30;
-var n = 40;
+var m = 40;
+var n = 30;
 
-for (var i = 0; i < m; i++) {
+/*for (var i = 0; i < m; i++) {
     matrix.push([]);
 }
 for (var a = 0; a < n; a++) {
@@ -12,7 +12,7 @@ for (var a = 0; a < n; a++) {
         matrix[x].push(Math.round(Math.random() * 5));
 
     }
-}
+}*/
 
 var grassArr = [];
 var side = 25;
@@ -20,9 +20,17 @@ var xotaker = [];
 var gishatich = [];
 var vorsord = [];
 var mah = [];
+var astvac = [];
 
 function setup() {
-    frameRate(5);
+    frameRate(20);
+    for (var y = 0; y < n; y++) {
+        matrix[y] = [];
+
+        for (var x = 0; x < m; x++) {
+            matrix[y][x] = Math.round(Math.random() * 6);
+        }
+    }
     createCanvas(matrix[0].length * side, matrix.length * side);
     background("grey");
 
@@ -43,6 +51,9 @@ function setup() {
             else if (matrix[y][x] == 5) {
                 mah.push(new Mah(x, y, 5));
             }
+            else if (matrix[y][x] == 6) {
+                astvac.push(new Astvac(x, y, 6));
+            }
         }
     }
 
@@ -50,23 +61,23 @@ function setup() {
 function draw() {
 
     days++;
-    if (days < 9) {
+    if (days < 18) {
         weather = 1;
         document.getElementById("w").innerHTML = "Գարուն";
     }
-    else if (days >= 9 && days < 18) {
+    else if (days >= 18 && days < 27) {
         weather = 2;
         document.getElementById("w").innerHTML = "Ամառ";
     }
-    else if (days >= 18 && days < 27) {
+    else if (days >= 27 && days < 36) {
         weather = 3;
         document.getElementById("w").innerHTML = "Աշուն";
     }
-    else if (days >= 27 && days < 36) {
+    else if (days >= 36 && days < 45) {
         weather = 4;
         document.getElementById("w").innerHTML = "Ձմեռ";
     }
-    else if (days > 36) {
+    else if (days > 45) {
         days = 0;
     }
     for (var y = 0; y < matrix.length; y++) {
@@ -104,6 +115,10 @@ function draw() {
             }
             else if (matrix[y][x] == 5) {
                 fill("black");
+                rect(x * side, y * side, side, side);
+            }
+            else if (matrix[y][x] == 6) {
+                fill("#3FD9F5");
                 rect(x * side, y * side, side, side);
             }
         }
@@ -181,7 +196,29 @@ function draw() {
     for (var i in mah) {
         mah[i].bazmanal();
     }
-
+    for (var i in mah) {
+        mah[i].mahanal();
+    }
+    for (var i in astvac) {
+        astvac[i].sharjvel();
+    }
+    for (var i in astvac) {
+        astvac[i].bazmanal();
+    }
+    for (var i in astvac) {
+        astvac[i].utel();
+        for (var c in mah) {
+            if (mah[c].x == astvac[i].x && mah[c].y == astvac[i].y) {
+                mah.splice(c, 1);
+            }
+        }
+    }
+}
+function mouseClicked() {
+    if (mouseY <= matrix.length * side && mouseX <= matrix[0].length * side && mouseX > 0 && mouseY > 0){
+        var moux = console.log(mouseX);
+        var mouy = console.log(mouseY);
+    }
 }
 
 // https://github.com/robabraham/Programming3

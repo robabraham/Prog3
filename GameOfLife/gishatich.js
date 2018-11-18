@@ -33,7 +33,7 @@ class Gishatich extends KendaniEak {
         }
     }
     bazmanal() {
-        if (this.energy == 7) {
+        if (this.energy == 5) {
             this.energy++;
             var norVandak = random(this.yntrelVandak(0));
             if (norVandak) {
@@ -47,6 +47,7 @@ class Gishatich extends KendaniEak {
     utel() {
         this.stanalNorKordinatner();
         var datarkVandakner = this.yntrelVandak(2);
+        var datarkVandakner = this.yntrelVandak(1);
         var norVandak = random(datarkVandakner);
         if (norVandak) {
             matrix[this.y][this.x] = 0;

@@ -1,4 +1,4 @@
-class Mah extends KendaniEak {
+class Astvac extends KendaniEak {
     constructor(x, y, index) {
         super(x, y, index);
         this.tariq = 0;
@@ -33,7 +33,7 @@ class Mah extends KendaniEak {
         }
     }
     bazmanal() {
-        if (this.energy == 12) {
+        if (this.energy == 30) {
             var norVandak = random(this.yntrelVandak(0));
             if (norVandak) {
                 var normah = new Mah(norVandak[0], norVandak[1]);
@@ -46,26 +46,18 @@ class Mah extends KendaniEak {
     utel() {
         this.stanalNorKordinatner();
         var datarkVandakner = this.yntrelVandak(4);
+        var datarkVandakner = this.yntrelVandak(3);
+        var datarkVandakner = this.yntrelVandak(2);
         var norVandak = random(datarkVandakner);
         if (norVandak) {
             matrix[this.y][this.x] = 0;
-            matrix[norVandak[1]][norVandak[0]] = 5;
+            matrix[norVandak[1]][norVandak[0]] = 6;
             this.x = norVandak[0];
             this.y = norVandak[1];
             this.energy++;
         }
         else {
             this.sharjvel();
-        }
-    }
-    mahanal() {
-        if (this.energy == 9) {
-            matrix[this.y][this.x] = 0;
-            for (var c in mah) {
-                if (mah[c].x == this.x && mah[c].y == this.y) {
-                    mah.splice(c, 1);
-                }
-            }
         }
     }
 }

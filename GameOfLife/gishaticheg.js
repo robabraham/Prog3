@@ -1,4 +1,4 @@
-class Gishatich extends KendaniEak {
+class GishatichEg extends KendaniEak {
     constructor(x, y, index) {
         super(x, y, index);
         this.tariq = 0;
@@ -26,7 +26,7 @@ class Gishatich extends KendaniEak {
         var norVandak = random(datarkVandakner);
         if (norVandak) {
             matrix[this.y][this.x] = 0;
-            matrix[norVandak[1]][norVandak[0]] = 3;
+            matrix[norVandak[1]][norVandak[0]] = 3.1;
             this.x = norVandak[0];
             this.y = norVandak[1];
             this.energy--;
@@ -35,12 +35,12 @@ class Gishatich extends KendaniEak {
     bazmanal() {
         if (this.energy == 5) {
             this.energy++;
-            var norVandak = random(this.yntrelVandak(3.1));
+            var norVandak = random(this.yntrelVandak(3));
             if (norVandak) {
                 var norgishatich = new Gishatich(norVandak[0], norVandak[1]);
                 gishatich.push(norgishatich);
                 if(Math.random() < 0.5){
-                    matrix[norVandak[1]][norVandak[0]] = 3;            
+                    matrix[norVandak[1]][norVandak[0]] = 3;
                 }
                 else{
                     matrix[norVandak[1]][norVandak[0]] = 3.1;
@@ -56,7 +56,7 @@ class Gishatich extends KendaniEak {
         var norVandak = random(datarkVandakner);
         if (norVandak) {
             matrix[this.y][this.x] = 0;
-            matrix[norVandak[1]][norVandak[0]] = 3;
+            matrix[norVandak[1]][norVandak[0]] = 3.1;
             this.x = norVandak[0];
             this.y = norVandak[1];
             this.energy++;

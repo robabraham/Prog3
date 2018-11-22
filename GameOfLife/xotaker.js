@@ -50,11 +50,16 @@ class Xotaker extends KendaniEak {
     bazmanal() {
         if (this.energy == 3) {
             this.energy++;
-            var norVandak = random(this.yntrelVandak(0));
+            var norVandak = random(this.yntrelVandak(2.1));
             if (norVandak) {
                 var norXotaker = new Xotaker(norVandak[0], norVandak[1]);
                 xotaker.push(norXotaker);
-                matrix[norVandak[1]][norVandak[0]] = 2;
+                if(Math.random() < 0.5){
+                    matrix[norVandak[1]][norVandak[0]] = 2; 
+                }
+                else{
+                    matrix[norVandak[1]][norVandak[0]] = 2.1;
+                }
                 this.multiply = 0;
             }
         }

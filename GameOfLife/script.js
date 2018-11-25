@@ -1,4 +1,6 @@
+var socket = io.connect();
 var weather;
+var time = 0;
 var days = 0;
 var matrix = [
     [2.1, 1, 2, 1, 1, 1, 1, 2.1, 0, 0, 0, 1, 0, 1, 0, 1, 5, 2, 0, 0, 0, 0, 1, 1, 2, 0, 5, 2.1, 0, 0, 0, 0, 1, 1, 3.1, 4, 0, 0, 0, 1, 1, 0, 0],
@@ -75,7 +77,7 @@ var xotakerEg = [];
 var gishatichEg = [];
 
 function setup() {
-    frameRate(1);
+    frameRate(10);
     /*for (var y = 0; y < n; y++) {
         matrix[y] = [];
 
@@ -116,8 +118,24 @@ function setup() {
     }
 
 }
+var statistics;
 function draw() {
-
+    if (frameCount % 60 == 0) {
+        
+        statistics = {
+            "Frame number": frameCount,
+            "Խոտերի քանակ՝ ": grassArr.length,
+            "Որձ խոտակերների քանակ՝ ": xotaker.length,
+            "Էգ խոտակերների քանակ՝ ": xotakerEg.length,
+            "Որձ գիշատիչների քանակ՝ ": gishatich.length,
+            "Էգ գիշատիչների քանակ՝ ": gishatichEg.length,
+            "Որսորդների քանակ՝ ": vorsord.length,
+            "Մահերի քանակ՝ ": mah.length,
+            "Աստվածների քանակ ՝ ": astvac.length
+        }
+        socket.emit("send statistics", statistics);
+    } 
+    time++;
     days++;
     if (days < 18) {
         weather = 1;
@@ -141,55 +159,58 @@ function draw() {
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
             if (matrix[y][x] == 0) {
+                noStroke();
                 fill("grey");
                 rect(x * side, y * side, side, side);
             }
             else if (matrix[y][x] == 1) {
                 if (weather == 1) {
+                    noStroke();
                     fill("#67E11C");
                 }
                 else if (weather == 2) {
+                    noStroke();
                     fill("green");
                 }
                 else if (weather == 3) {
+                    noStroke();
                     fill("#D19919");
                 }
                 else if (weather == 4) {
+                    noStroke();
                     fill("white");
                 }
                 rect(x * side, y * side, side, side);
             }
-            else if (matrix[y][x] == 2) {
+            else if ((matrix[y][x] == 2) || (matrix[y][x] == 2.1)) {
+                noStroke();
                 fill("yellow");
                 rect(x * side, y * side, side, side);
             }
-            else if (matrix[y][x] == 2.1) {
-                fill("#F6E680");
-                rect(x * side, y * side, side, side);
-            }
-            else if (matrix[y][x] == 3) {
+            else if ((matrix[y][x] == 3) || (matrix[y][x] == 3.1)) {
+                noStroke();
                 fill("blue");
                 rect(x * side, y * side, side, side);
             }
-            else if (matrix[y][x] == 3.1) {
-                fill("#75BEF8  ");
-                rect(x * side, y * side, side, side);
-            }
             else if (matrix[y][x] == 4) {
+                noStroke();
                 fill("red");
                 rect(x * side, y * side, side, side);
             }
             else if (matrix[y][x] == 5) {
+                noStroke();
                 fill("black");
                 rect(x * side, y * side, side, side);
             }
             else if (matrix[y][x] == 6) {
-                fill("#7F1417");
+                noStroke();
+                fill("white");
                 rect(x * side, y * side, side, side);
             }
         }
     }
-
+    
+   
     for (var i in grassArr) {
         grassArr[i].bazmanal();
     }
@@ -287,12 +308,6 @@ function draw() {
                 mah.splice(c, 1);
             }
         }
-    }
-}
-function mouseClicked() {
-    if (mouseY <= matrix.length * side && mouseX <= matrix[0].length * side && mouseX > 0 && mouseY > 0) {
-        var moux = console.log(mouseX);
-        var mouy = console.log(mouseY);
     }
 }
 

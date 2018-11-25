@@ -71,9 +71,11 @@ var gishatich = [];
 var vorsord = [];
 var mah = [];
 var astvac = [];
+var xotakerEg = [];
+var gishatichEg = [];
 
 function setup() {
-    frameRate(10);
+    frameRate(1);
     /*for (var y = 0; y < n; y++) {
         matrix[y] = [];
 
@@ -90,20 +92,16 @@ function setup() {
                 grassArr.push(new Grass(x, y, 1));
             }
             else if (matrix[y][x] == 2) {
-                var xt = new Xotaker(x, y);
-                xotaker.push(xt);
+                xotaker.push(new Xotaker(x, y, 2))
             }
             else if (matrix[y][x] == 2.1) {
-                var xteg = new XotakerEg(x, y);
-                xotaker.push(xteg);
+                xotakerEg.push(new XotakerEg(x, y, 2.1));
             }
             else if (matrix[y][x] == 3) {
-                var gsh = new Gishatich(x, y)
-                gishatich.push(gsh);
+                gishatich.push(new Gishatich(x, y, 3));
             }
             else if (matrix[y][x] == 3.1) {
-                var gsheg = new GishatichEg(x, y)
-                gishatich.push(gsheg);
+                gishatichEg.push(new GishatichEg(x, y, 3.1));
             }
             else if (matrix[y][x] == 4) {
                 vorsord.push(new Vorsord(x, y, 4));
@@ -166,7 +164,7 @@ function draw() {
                 rect(x * side, y * side, side, side);
             }
             else if (matrix[y][x] == 2.1) {
-                fill("#F2F18B");
+                fill("#F6E680");
                 rect(x * side, y * side, side, side);
             }
             else if (matrix[y][x] == 3) {
@@ -174,7 +172,7 @@ function draw() {
                 rect(x * side, y * side, side, side);
             }
             else if (matrix[y][x] == 3.1) {
-                fill("#7280F5");
+                fill("#75BEF8  ");
                 rect(x * side, y * side, side, side);
             }
             else if (matrix[y][x] == 4) {
@@ -198,39 +196,48 @@ function draw() {
 
     for (var i in xotaker) {
         xotaker[i].sharjvel();
-    }
-    for (var i in xotaker) {
         xotaker[i].utel();
         for (var c in grassArr) {
             if (grassArr[c].x == xotaker[i].x && grassArr[c].y == xotaker[i].y) {
                 grassArr.splice(c, 1);
             }
         }
-    }
-    for (var i in xotaker) {
-        xotaker[i].bazmanal();
-    }
-    for (var i in xotaker) {
         xotaker[i].mahanal();
+    }
+
+    for (var i in xotakerEg) {
+        xotakerEg[i].sharjvel();
+        xotakerEg[i].utel();
+        for (var c in grassArr) {
+            if (grassArr[c].x == xotakerEg[i].x && grassArr[c].y == xotakerEg[i].y) {
+                grassArr.splice(c, 1);
+            }
+        }
+        xotakerEg[i].bazmanal();
+        xotakerEg[i].mahanal();
     }
 
     for (var i in gishatich) {
         gishatich[i].sharjvel();
-    }
-
-    for (var i in gishatich) {
         gishatich[i].utel();
         for (var c in xotaker) {
             if (xotaker[c].x == gishatich[i].x && xotaker[c].y == gishatich[i].y) {
                 xotaker.splice(c, 1);
             }
         }
+        gishatich[i].mahanal();
     }
-    for (var i in gishatich) {
-        gishatich[i].bazmanal();
-    }
-    for (var i in gishatich) {
-        gishatich[i].mahanal()
+
+    for (var i in gishatichEg) {
+        gishatichEg[i].sharjvel();
+        gishatichEg[i].utel();
+        for (var c in xotakerEg) {
+            if (xotaker[c].x == gishatichEg[i].x && xotaker[c].y == gishatichEg[i].y) {
+                xotaker.splice(c, 1);
+            }
+        }
+        gishatichEg[i].bazmanal();
+        gishatichEg[i].mahanal();
     }
     for (var i in vorsord) {
         vorsord[i].sharjvel();

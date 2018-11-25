@@ -47,9 +47,10 @@ class Xotaker extends KendaniEak {
             this.sharjvel();
         }
     }
-    bazmanal() {
+   /* bazmanal() {
         if (this.energy == 3) {
             this.energy++;
+            var norVandak = random(this.yntrelVandak(0));
             var norVandak = random(this.yntrelVandak(2.1));
             if (norVandak) {
                 var norXotaker = new Xotaker(norVandak[0], norVandak[1]);
@@ -63,7 +64,7 @@ class Xotaker extends KendaniEak {
                 this.multiply = 0;
             }
         }
-    }
+    }*/
     mahanal() {
         if (this.energy < 0) {
             matrix[this.y][this.x] = 0;
@@ -76,4 +77,33 @@ class Xotaker extends KendaniEak {
     }
 
 }
+class XotakerEg extends Xotaker {
+    constructor(x, y, index) {
+        super(x, y, index);
+        this.tariq = 0;
+    }
+    
+    bazmanal() {
+        if (this.energy == 1) {
+            this.energy--;
+            var norVandak = random(this.yntrelVandak(0));
+            var norVandak = random(this.yntrelVandak(2));
+            if (norVandak) {
+                var norXotaker = new Xotaker(norVandak[0], norVandak[1]);
+                xotaker.push(norXotaker);
+                if(Math.random() < 0.5){
+
+                    matrix[norVandak[1]][norVandak[0]] = 2;
+                }
+                else{
+                    matrix[norVandak[1]][norVandak[0]] = 2.1;
+                }
+                this.multiply = 0;
+            }
+        }
+    }
+
+}
+
+
 

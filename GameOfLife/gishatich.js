@@ -32,9 +32,10 @@ class Gishatich extends KendaniEak {
             this.energy--;
         }
     }
-    bazmanal() {
+    /*bazmanal() {
         if (this.energy == 5) {
             this.energy++;
+            var norVandak = random(this.yntrelVandak(0));
             var norVandak = random(this.yntrelVandak(3.1));
             if (norVandak) {
                 var norgishatich = new Gishatich(norVandak[0], norVandak[1]);
@@ -48,10 +49,11 @@ class Gishatich extends KendaniEak {
                 this.multiply = 0;
             }
         }
-    }
+    }*/
     utel() {
         this.stanalNorKordinatner();
         var datarkVandakner = this.yntrelVandak(2);
+        var datarkVandakner = this.yntrelVandak(2.1);
         var datarkVandakner = this.yntrelVandak(1);
         var norVandak = random(datarkVandakner);
         if (norVandak) {
@@ -75,5 +77,31 @@ class Gishatich extends KendaniEak {
                 }
             }
       }
+}
+      
+class GishatichEg extends Gishatich {
+    constructor(x, y, index) {
+        super(x, y, index);
+        this.tariq = 0;
+    }
+    
+    bazmanal() {
+        if (this.energy == 3) {
+            this.energy--;
+            var norVandak = random(this.yntrelVandak(0));
+            var norVandak = random(this.yntrelVandak(3));
+            if (norVandak) {
+                var norgishatich = new Gishatich(norVandak[0], norVandak[1]);
+                gishatich.push(norgishatich);
+                if(Math.random() < 0.5){
+                    matrix[norVandak[1]][norVandak[0]] = 3;
+                }
+                else{
+                    matrix[norVandak[1]][norVandak[0]] = 3.1;
+                }
+                this.multiply = 0;
+            }
+        }
+    }
 }
         

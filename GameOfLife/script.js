@@ -2,6 +2,7 @@ var socket = io.connect();
 var weather;
 var time = 0;
 var days = 0;
+var meteor = 0;
 var matrix = [
     [2.1, 1, 2, 1, 1, 1, 1, 2.1, 0, 0, 0, 1, 0, 1, 0, 1, 5, 2, 0, 0, 0, 0, 1, 1, 2, 0, 5, 2.1, 0, 0, 0, 0, 1, 1, 3.1, 4, 0, 0, 0, 1, 1, 0, 0],
 
@@ -118,6 +119,7 @@ function setup() {
     }
 
 }
+var d = 0;
 var statistics;
 function draw() {
     if (frameCount % 60 == 0) {
@@ -135,6 +137,7 @@ function draw() {
         }
         socket.emit("send statistics", statistics);
     } 
+    meteor++;
     time++;
     days++;
     if (days < 18) {
@@ -156,6 +159,11 @@ function draw() {
     else if (days > 45) {
         days = 0;
     }
+    if (meteor >= 9) {
+        matrix[Math.round(Math.random()*21)][Math.round(Math.random()*20)] = 8;
+        meteor = 0;
+    }
+
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
             if (matrix[y][x] == 0) {
@@ -205,6 +213,26 @@ function draw() {
             else if (matrix[y][x] == 6) {
                 noStroke();
                 fill("white");
+                rect(x * side, y * side, side, side);
+            }
+            else if (matrix[y][x] == 8) {
+                matrix[y+1][x] = 6;
+                var d = new Astvac(x, y+1);
+                astvac.push(d);
+
+                matrix[y-1][x] = 6;
+                var d = new Astvac(x, y-1);
+                astvac.push(d);
+
+                matrix[y][x+1] = 6;
+                var d = new Astvac(x+1, y);
+                astvac.push(d);
+
+                matrix[y][x-1] = 6;
+                var d = new Astvac(x-1, y);
+                astvac.push(d);
+
+                fill("#5e0000");
                 rect(x * side, y * side, side, side);
             }
         }
@@ -297,18 +325,8 @@ function draw() {
     }
     for (var i in astvac) {
         astvac[i].sharjvel();
-    }
-    for (var i in astvac) {
-        astvac[i].bazmanal();
-    }
-    for (var i in astvac) {
         astvac[i].utel();
-        for (var c in mah) {
-            if (mah[c].x == astvac[i].x && mah[c].y == astvac[i].y) {
-                mah.splice(c, 1);
-            }
-        }
-    }
+     }
 }
 
 // https://github.com/robabraham/Programming3
